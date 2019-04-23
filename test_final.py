@@ -11,7 +11,7 @@ import argparse
 
 tf.app.flags.DEFINE_string("dir", "../albacore/data", "folder directory")
 tf.app.flags.DEFINE_string("test_file", "P_test", "Test data file")
-tf.app.flags.DEFINE_string("training_file", "P_train", "Train data file of model trained")
+tf.app.flags.DEFINE_string("training_file", "", "Train data file of model trained")
 tf.app.flags.DEFINE_string("timestamp", "0715", "Timestamp")
 tf.app.flags.DEFINE_integer("max_post_text_len", 134, "Max length of the post text")
 tf.app.flags.DEFINE_integer("max_target_description_len", 0, "Max length of the target description")
