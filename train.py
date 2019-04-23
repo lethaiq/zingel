@@ -102,7 +102,7 @@ def main(argv=None):
                 checkpoint_prefix = os.path.join(checkpoint_dir, FLAGS.model+str(round)+FLAGS.training_file)
                 if not os.path.exists(checkpoint_dir):
                     os.makedirs(checkpoint_dir)
-                saver = tf.train.Saver()
+                saver = tf.train.Saver(max_to_keep=None)
 
                 sess.run(tf.global_variables_initializer())
 
