@@ -9,8 +9,8 @@ from sklearn.metrics import accuracy_score as acc
 from sklearn.metrics import roc_auc_score
 import argparse
 
-tf.app.flags.DEFINE_string("dir", "/data", "folder directory")
-tf.app.flags.DEFINE_string("test_file", "clickbait17-train-170331", "Test data file")
+tf.app.flags.DEFINE_string("dir", "../albacore/data", "folder directory")
+tf.app.flags.DEFINE_string("test_file", "P_test", "Test data file")
 tf.app.flags.DEFINE_string("timestamp", "0715", "Timestamp")
 tf.app.flags.DEFINE_integer("max_post_text_len", 39, "Max length of the post text")
 tf.app.flags.DEFINE_integer("max_target_description_len", 0, "Max length of the target description")
@@ -109,9 +109,9 @@ def main(argv=None):
             output.write(json.dumps({"id": ids[i], "clickbaitScore": float(avg_prediction[i])})+'\n')
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-i', dest="input_directory")
-    parser.add_argument('-o', dest="output_directory")
-    argv = parser.parse_args()
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument('-i', dest="input_directory")
+    # parser.add_argument('-o', dest="output_directory")
+    # argv = parser.parse_args()
     # tf.app.run(argv=[None, argv.input_directory, argv.output_directory])
     tf.app.run()
