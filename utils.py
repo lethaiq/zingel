@@ -4,7 +4,7 @@ import os
 import re
 import nltk
 from gensim.models import Word2Vec
-from tweet_utils import *
+# from tweet_utils import *
 from collections import Counter
 from PIL import Image
 import scipy.io
