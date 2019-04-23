@@ -14,7 +14,7 @@ tf.app.flags.DEFINE_string("test_file", "P_test", "Test data file")
 tf.app.flags.DEFINE_string("timestamp", "0715", "Timestamp")
 tf.app.flags.DEFINE_integer("max_post_text_len", 39, "Max length of the post text")
 tf.app.flags.DEFINE_integer("max_target_description_len", 0, "Max length of the target description")
-tf.app.flags.DEFINE_integer("if_annotated", 0, ">=1 if the Test data come with the annotations, 0 otherwise")
+tf.app.flags.DEFINE_integer("if_annotated", 1, ">=1 if the Test data come with the annotations, 0 otherwise")
 tf.app.flags.DEFINE_string("model", "SAN", "which model to use")
 tf.app.flags.DEFINE_boolean("use_target_description", False, "whether to use the target description as input")
 tf.app.flags.DEFINE_boolean("use_image", False, "whether to use the image as input")
@@ -76,7 +76,7 @@ def main(argv=None):
             input_x2_len = g.get_tensor_by_name("target_description_len:0")
             input_x3 = g.get_tensor_by_name("image_feature:0")
             output_prediction = g.get_tensor_by_name("prediction:0")
-            output_distribution = g.get_tensor_by_name("distribution:0")
+            # output_distribution = g.get_tensor_by_name("distribution:0")
             feed_dict = {input_x1: post_texts,
                          input_x1_len: post_text_lens,
                          dropout_rate_hidden: 0,
@@ -86,21 +86,22 @@ def main(argv=None):
                          input_x2: target_descriptions,
                          input_x2_len: target_description_lens,
                          input_x3: image_features}
-            prediction, distribution = sess.run([output_prediction, output_distribution], feed_dict)
+            # prediction, distribution = sess.run([output_prediction, output_distribution], feed_dict)
+            prediction = sess.run([output_prediction], feed_dict)
             prediction = np.ravel(prediction).astype(np.float32)
             all_prediction.append(prediction)
-            all_distribution.append(distribution)
+            # all_distribution.append(distribution)
             if FLAGS.if_annotated:
                 print("mse",mse(prediction, truth_means))
-                print("acc",acc(distribution2label(truth_classes), distribution2label(distribution)))
-                print("auc",roc_auc_score((distribution2label(truth_classes), distribution2label(distribution))))
+                print("acc",acc(truth_means, prediction))
+                print("auc",roc_auc_score(truth_means, prediction))
 
     avg_prediction = np.mean(all_prediction, axis=0)
-    avg_distribution = np.mean(all_distribution, axis=0)
+    # avg_distribution = np.mean(all_distribution, axis=0)
     if FLAGS.if_annotated:
         print("avg_mse",mse(avg_prediction, truth_means))
-        print("avg_acc",acc(distribution2label(truth_classes), distribution2label(avg_distribution)))
-        print("auc",roc_auc_scoredistribution2label(truth_classes), distribution2label(avg_distribution))
+        print("avg_acc",acc(truth_means, avg_prediction))
+        print("auc",roc_auc_score(truth_means, avg_prediction))
 
     if not os.path.exists(argv[2]):
         os.makedirs(argv[2])
