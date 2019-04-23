@@ -97,7 +97,7 @@ def main(argv=None):
                 # val_summary_writer = tf.summary.FileWriter(val_summary_dir, sess.graph)
 
                 checkpoint_dir = os.path.join(out_dir, "checkpoints")
-                checkpoint_prefix = os.path.join(checkpoint_dir, FLAGS.model+str(round))
+                checkpoint_prefix = os.path.join(checkpoint_dir, FLAGS.model+str(round)+FLAGS.training_file)
                 if not os.path.exists(checkpoint_dir):
                     os.makedirs(checkpoint_dir)
                 saver = tf.train.Saver()

@@ -64,7 +64,7 @@ def main(argv=None):
         tf.reset_default_graph()
         saver = tf.train.import_meta_graph(os.path.join(FLAGS.dir, "runs", FLAGS.timestamp, "checkpoints", FLAGS.model+str(i)+".meta"), clear_devices=True)
         with tf.Session() as sess:
-            saver.restore(sess, os.path.join(FLAGS.dir, "runs", FLAGS.timestamp, "checkpoints", FLAGS.model+str(i)))
+            saver.restore(sess, os.path.join(FLAGS.dir, "runs", FLAGS.timestamp, "checkpoints", FLAGS.model+str(i)+FLAGS.training_file))
             g = tf.get_default_graph()
             input_x1 = g.get_tensor_by_name("post_text:0")
             input_x1_len = g.get_tensor_by_name("post_text_len:0")
