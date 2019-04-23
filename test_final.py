@@ -100,6 +100,7 @@ def main(argv=None):
     avg_prediction = np.mean(all_prediction, axis=0)
     # avg_distribution = np.mean(all_distribution, axis=0)
     if FLAGS.if_annotated:
+        print(avg_prediction, truth_means)
         print("avg_mse",mse(avg_prediction, truth_means))
         print("avg_acc",acc(truth_means, avg_prediction))
         print("auc",roc_auc_score(truth_means, avg_prediction))
