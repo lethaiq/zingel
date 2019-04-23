@@ -71,9 +71,9 @@ def tokenise(text, with_process=True):
 def load_embeddings(fp, embedding_size):
     embedding = []
     vocab = []
-    with open(fp, 'r') as f:
-        for each_line in f:
-            row = each_line.decode('utf-8').split(' ')
+    with open(fp, 'r', encoding='UTF-8') as f:
+            for each_line in f:
+            row = each_line.split(' ')
             if len(row) == 2:
                 continue
             vocab.append(row[0])
