@@ -161,8 +161,8 @@ def main(argv=None):
         round += 1
         val_scores.append(min_mse_val)
         val_accs.append(acc)
-    print np.mean(val_scores)
-    print np.mean(val_accs)
+    print (np.mean(val_scores))
+    print (np.mean(val_accs))
 
 
 if __name__ == "__main__":
