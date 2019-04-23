@@ -78,8 +78,8 @@ def load_embeddings(fp, embedding_size):
                 continue
             vocab.append(row[0])
             if len(row[1:]) != embedding_size:
-                print row[0]
-                print len(row[1:])
+                print (row[0])
+                print (len(row[1:]))
             embedding.append(np.asarray(row[1:], dtype='float32'))
     word2id = dict(zip(vocab, range(2, len(vocab))))
     word2id[PAD] = 0
@@ -173,7 +173,7 @@ def read_data(fps, word2id=None, y_len=1, use_target_description=False, use_imag
                     image_features.append(all_image_features[id2imageidx[each_item["id"]]].flatten())
                 else:
                     image_features.append([])
-    print "Deleted number of items: " + str(num)
+    print ("Deleted number of items: " + str(num))
     return ids, post_texts, truth_classes, post_text_lens, truth_means, target_descriptions, target_description_lens, image_features
 
 
