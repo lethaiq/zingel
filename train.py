@@ -8,7 +8,7 @@ import datetime
 tf.app.flags.DEFINE_string("dir", "/data", "folder directory")
 tf.app.flags.DEFINE_string("training_file", "clickbait17-validation-170630", "Training data file")
 tf.app.flags.DEFINE_string("validation_file", "clickbait17-train-170331", "Validation data file")
-tf.app.flags.DEFINE_integer("epochs", 20, "epochs")
+tf.app.flags.DEFINE_integer("epochs", 30, "epochs")
 tf.app.flags.DEFINE_integer("batch_size", 32, "batch_size")
 tf.app.flags.DEFINE_string("filter_sizes", "3,4,5", "Comma-separated filter sizes")
 tf.app.flags.DEFINE_integer("num_filters", 100, "Number of filters per filter size")

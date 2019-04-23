@@ -103,7 +103,7 @@ def main(argv=None):
         print(avg_prediction, truth_means)
         print("avg_mse",mse(avg_prediction, truth_means))
         print("avg_acc",acc(truth_means, np.round(avg_prediction)))
-        print("auc",roc_auc_score(truth_means, np.round(avg_prediction)))
+        print("avg_auc",roc_auc_score(truth_means, np.round(avg_prediction)))
 
     if not os.path.exists(argv[2]):
         os.makedirs(argv[2])
