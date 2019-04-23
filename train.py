@@ -118,7 +118,7 @@ def main(argv=None):
                                  model.input_x3: input_x3}
                     _, step, loss, mse, accuracy = sess.run([train_op, global_step, model.loss, model.mse, model.accuracy], feed_dict)
                     time_str = datetime.datetime.now().isoformat()
-                    print("{}: step {}, loss {:g}, mse {:g}, acc {:g}".format(time_str, step, loss, mse, accuracy))
+                    # print("{}: step {}, loss {:g}, mse {:g}, acc {:g}".format(time_str, step, loss, mse, accuracy))
                     # train_summary_writer.add_summary(summaries, step)
 
                 def validation_step(input_x1, input_y, input_x1_len, input_z, input_x2, input_x2_len, input_x3, writer=None):
@@ -135,7 +135,7 @@ def main(argv=None):
                                  model.input_x3: input_x3}
                     step, loss, mse, accuracy = sess.run([global_step, model.loss, model.mse, model.accuracy], feed_dict)
                     time_str = datetime.datetime.now().isoformat()
-                    print("{}: step {}, loss {:g}, mse {:g}, acc {:g}".format(time_str, step, loss, mse, accuracy))
+                    # print("{}: step {}, loss {:g}, mse {:g}, acc {:g}".format(time_str, step, loss, mse, accuracy))
                     # if writer:
                     #     writer.add_summary(summaries, step)
                     return mse, accuracy
