@@ -91,7 +91,7 @@ def main(argv=None):
             prediction = np.ravel(prediction).astype(np.float32)
             all_prediction.append(prediction)
             # all_distribution.append(distribution)
-            print(prediction)
+            print(prediction, truth_means)
             if FLAGS.if_annotated:
                 print("mse",mse(prediction, truth_means))
                 print("acc",acc(truth_means, prediction))
