@@ -113,4 +113,5 @@ if __name__ == "__main__":
     parser.add_argument('-i', dest="input_directory")
     parser.add_argument('-o', dest="output_directory")
     argv = parser.parse_args()
-    tf.app.run(argv=[None, argv.input_directory, argv.output_directory])
+    # tf.app.run(argv=[None, argv.input_directory, argv.output_directory])
+    tf.app.run()
