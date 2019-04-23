@@ -88,7 +88,7 @@ def main(argv=None):
                          input_x3: image_features}
             # prediction, distribution = sess.run([output_prediction, output_distribution], feed_dict)
             prediction = sess.run([output_prediction], feed_dict)
-            prediction = np.ravel(prediction).astype(np.float32)
+            prediction = np.round(np.ravel(prediction).astype(np.float32))
             all_prediction.append(prediction)
             # all_distribution.append(distribution)
             print(prediction, truth_means)
