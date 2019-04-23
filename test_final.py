@@ -40,7 +40,7 @@ def main(argv=None):
         return
     with open(os.path.join(FLAGS.dir, 'word2id.json'), 'r') as fin:
         word2id = json.load(fin)
-    ids, post_texts, truth_classes, post_text_lens, truth_means, target_descriptions, target_description_lens, image_features = read_data(word2id=word2id, fps=[argv[1]], y_len=FLAGS.if_annotated, use_target_description=FLAGS.use_target_description, use_image=FLAGS.use_image)
+    ids, post_texts, truth_classes, post_text_lens, truth_means, target_descriptions, target_description_lens, image_features = read_data(word2id=word2id, fps=[os.path.join(FLAGS.dir, FLAGS.test_file)], y_len=FLAGS.if_annotated, use_target_description=FLAGS.use_target_description, use_image=FLAGS.use_image)
     post_texts = np.array(post_texts)
     truth_classes = np.array(truth_classes)
     post_text_lens = [each_len if each_len <= FLAGS.max_post_text_len else FLAGS.max_post_text_len for each_len in post_text_lens]
