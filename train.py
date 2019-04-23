@@ -47,7 +47,7 @@ def main(argv=None):
     post_text_lens = post_text_lens[shuffle_indices]
     truth_means = truth_means[shuffle_indices]
     max_post_text_len = max(post_text_lens)
-    print max_post_text_len
+    print (max_post_text_len)
     post_texts = pad_sequences(post_texts, max_post_text_len)
 
     target_descriptions = np.array(target_descriptions)
@@ -55,7 +55,7 @@ def main(argv=None):
     target_descriptions = target_descriptions[shuffle_indices]
     target_description_lens = target_description_lens[shuffle_indices]
     max_target_description_len = max(target_description_lens)
-    print max_target_description_len
+    print (max_target_description_len)
     target_descriptions = pad_sequences(target_descriptions, max_target_description_len)
 
     image_features = np.array(image_features)
