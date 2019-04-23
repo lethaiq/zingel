@@ -60,7 +60,7 @@ def main(argv=None):
 
     all_prediction = []
     all_distribution = []
-    for i in range(1, 6):
+    for i in range(1, 4):
         tf.reset_default_graph()
         saver = tf.train.import_meta_graph(os.path.join(FLAGS.dir, "runs", FLAGS.timestamp, "checkpoints", FLAGS.model+str(i)+".meta"), clear_devices=True)
         with tf.Session() as sess:
