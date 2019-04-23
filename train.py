@@ -61,7 +61,7 @@ def main(argv=None):
     image_features = np.array(image_features)
 
     data = np.array(list(zip(post_texts, truth_classes, post_text_lens, truth_means, target_descriptions, target_description_lens, image_features)))
-    kf = KFold(n_splits=5)
+    kf = KFold(n_splits=3)
     round = 1
     val_scores = []
     val_accs = []
