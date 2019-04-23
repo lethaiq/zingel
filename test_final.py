@@ -88,22 +88,22 @@ def main(argv=None):
                          input_x3: image_features}
             # prediction, distribution = sess.run([output_prediction, output_distribution], feed_dict)
             prediction = sess.run([output_prediction], feed_dict)
-            prediction = np.round(np.ravel(prediction).astype(np.float32))
+            prediction = np.ravel(prediction).astype(np.float32)
             all_prediction.append(prediction)
             # all_distribution.append(distribution)
             print(prediction, truth_means)
             if FLAGS.if_annotated:
                 print("mse",mse(prediction, truth_means))
-                print("acc",acc(truth_means, prediction))
-                print("auc",roc_auc_score(truth_means, prediction))
+                print("acc",acc(truth_means, np.round(prediction)))
+                print("auc",roc_auc_score(truth_means, np.round(prediction)))
 
     avg_prediction = np.mean(all_prediction, axis=0)
     # avg_distribution = np.mean(all_distribution, axis=0)
     if FLAGS.if_annotated:
         print(avg_prediction, truth_means)
         print("avg_mse",mse(avg_prediction, truth_means))
-        print("avg_acc",acc(truth_means, avg_prediction))
-        print("auc",roc_auc_score(truth_means, avg_prediction))
+        print("avg_acc",acc(truth_means, np.round(avg_prediction)))
+        print("auc",roc_auc_score(truth_means, np.round(avg_prediction)))
 
     if not os.path.exists(argv[2]):
         os.makedirs(argv[2])
