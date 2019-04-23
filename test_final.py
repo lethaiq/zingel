@@ -12,7 +12,7 @@ import argparse
 tf.app.flags.DEFINE_string("dir", "../albacore/data", "folder directory")
 tf.app.flags.DEFINE_string("test_file", "P_test", "Test data file")
 tf.app.flags.DEFINE_string("timestamp", "0715", "Timestamp")
-tf.app.flags.DEFINE_integer("max_post_text_len", 39, "Max length of the post text")
+tf.app.flags.DEFINE_integer("max_post_text_len", 134, "Max length of the post text")
 tf.app.flags.DEFINE_integer("max_target_description_len", 0, "Max length of the target description")
 tf.app.flags.DEFINE_integer("if_annotated", 1, ">=1 if the Test data come with the annotations, 0 otherwise")
 tf.app.flags.DEFINE_string("model", "SAN", "which model to use")
