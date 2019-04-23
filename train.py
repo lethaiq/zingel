@@ -18,7 +18,7 @@ tf.app.flags.DEFINE_float("dropout_rate_embedding", 0.2, "Dropout rate of word e
 tf.app.flags.DEFINE_integer("state_size", 64, "state_size")
 tf.app.flags.DEFINE_integer("hidden_size", 0, "hidden_size")
 tf.app.flags.DEFINE_string("timestamp", "0715", "Timestamp")
-tf.app.flags.DEFINE_integer("y_len", 4, "how to interpret the annotation")
+tf.app.flags.DEFINE_integer("y_len", 1, "how to interpret the annotation")
 tf.app.flags.DEFINE_string("model", "SAN", "which model to use")
 tf.app.flags.DEFINE_boolean("use_target_description", False, "whether to use the target description as input")
 tf.app.flags.DEFINE_boolean("use_image", False, "whether to use the image as input")
@@ -36,7 +36,7 @@ def main(argv=None):
         json.dump(word2id, fp=fout)
     # vocab_size = embedding.shape[0]
     # embedding_size = embedding.shape[1]
-    ids, post_texts, truth_classes, post_text_lens, truth_means, target_descriptions, target_description_lens, image_features = read_data(word2id=word2id, fps=[os.path.join(FLAGS.dir, FLAGS.training_file), os.path.join(FLAGS.dir, FLAGS.validation_file)], y_len=FLAGS.y_len, use_target_description=FLAGS.use_target_description, use_image=FLAGS.use_image)
+    ids, post_texts, truth_classes, post_text_lens, truth_means, target_descriptions, target_description_lens, image_features = read_data(word2id=word2id, fps=[os.path.join(FLAGS.dir, FLAGS.training_file)], y_len=FLAGS.y_len, use_target_description=FLAGS.use_target_description, use_image=FLAGS.use_image)
     post_texts = np.array(post_texts)
     truth_classes = np.array(truth_classes)
     post_text_lens = np.array(post_text_lens)
@@ -157,7 +157,7 @@ def main(argv=None):
                     if mse_val < min_mse_val:
                         min_mse_val = mse_val
                         acc = acc_val
-                        # saver.save(sess, checkpoint_prefix)
+                        saver.save(sess, checkpoint_prefix)
         round += 1
         val_scores.append(min_mse_val)
         val_accs.append(acc)

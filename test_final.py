@@ -6,6 +6,7 @@ import time
 import datetime
 from sklearn.metrics import mean_squared_error as mse
 from sklearn.metrics import accuracy_score as acc
+from sklearn.metrics import roc_auc_score
 import argparse
 
 tf.app.flags.DEFINE_string("dir", "/data", "folder directory")
@@ -29,13 +30,13 @@ def distribution2label(ar):
 
 def main(argv=None):
     if not os.path.exists(os.path.join(FLAGS.dir, 'word2id.json')):
-        print "Error: no word2id file!"
+        print("Error: no word2id file!")
         return
     if not os.path.exists(os.path.join(FLAGS.dir, "runs", FLAGS.timestamp, "checkpoints")):
-        print "Error: no saved model!"
+        print("Error: no saved model!")
         return
     if FLAGS.use_image and not os.path.exists(os.path.join(FLAGS.dir, FLAGS.test_file, "id2imageidx.json")):
-        print "Error: no processed image features!"
+        print("Error: no processed image features!")
         return
     with open(os.path.join(FLAGS.dir, 'word2id.json'), 'r') as fin:
         word2id = json.load(fin)
@@ -90,13 +91,17 @@ def main(argv=None):
             all_prediction.append(prediction)
             all_distribution.append(distribution)
             if FLAGS.if_annotated:
-                print mse(prediction, truth_means)
-                print acc(distribution2label(truth_classes), distribution2label(distribution))
+                print("mse",mse(prediction, truth_means))
+                print("acc",acc(distribution2label(truth_classes), distribution2label(distribution)))
+                print("auc",roc_auc_score((distribution2label(truth_classes), distribution2label(distribution))))
+
     avg_prediction = np.mean(all_prediction, axis=0)
     avg_distribution = np.mean(all_distribution, axis=0)
     if FLAGS.if_annotated:
-        print mse(avg_prediction, truth_means)
-        print acc(distribution2label(truth_classes), distribution2label(avg_distribution))
+        print("avg_mse",mse(avg_prediction, truth_means))
+        print("avg_acc",acc(distribution2label(truth_classes), distribution2label(avg_distribution)))
+        print("auc",roc_auc_scoredistribution2label(truth_classes), distribution2label(avg_distribution))
+
     if not os.path.exists(argv[2]):
         os.makedirs(argv[2])
     with open(os.path.join(argv[2], "predictions.jsonl"), 'w') as output:
